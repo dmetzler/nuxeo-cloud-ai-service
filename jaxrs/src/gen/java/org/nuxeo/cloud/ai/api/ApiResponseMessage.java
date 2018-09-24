@@ -3,7 +3,7 @@ package org.nuxeo.cloud.ai.api;
 import javax.xml.bind.annotation.XmlTransient;
 
 @javax.xml.bind.annotation.XmlRootElement
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-21T08:13:33.267Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-24T23:06:58.994Z")
 public class ApiResponseMessage {
     public static final int ERROR = 1;
     public static final int WARNING = 2;

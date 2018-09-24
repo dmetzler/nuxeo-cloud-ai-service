@@ -16,18 +16,24 @@ package org.nuxeo.cloud.ai.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
+import org.nuxeo.cloud.ai.model.TFModel;
+import java.io.Serializable;
 import javax.validation.constraints.*;
 
 /**
  * Model
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-21T08:13:33.267Z")
-public class Model   {
-  @JsonProperty("id")
-  private Long id = null;
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-24T23:06:58.994Z")
+public class Model  implements Serializable {
+  @JsonProperty("type")
+  private String type = null;
+
+  @JsonProperty("version")
+  private String version = null;
 
   @JsonProperty("modelId")
   private String modelId = null;
@@ -35,62 +41,48 @@ public class Model   {
   @JsonProperty("trainingModel")
   private String trainingModel = null;
 
-  /**
-   * Model Status
-   */
-  public enum StatusEnum {
-    NEW("new"),
-    
-    UNTRAINED("untrained"),
-    
-    TRAINED("trained");
+  @JsonProperty("TFModels")
+  private List<TFModel> tfModels = null;
 
-    private String value;
+  @JsonProperty("data")
+  private List<String> data = null;
 
-    StatusEnum(String value) {
-      this.value = value;
-    }
-
-    @Override
-    @JsonValue
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static StatusEnum fromValue(String text) {
-      for (StatusEnum b : StatusEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      return null;
-    }
-  }
-
-  @JsonProperty("status")
-  private StatusEnum status = null;
-
-  @JsonProperty("published")
-  private Boolean published = null;
-
-  public Model id(Long id) {
-    this.id = id;
+  public Model type(String type) {
+    this.type = type;
     return this;
   }
 
   /**
-   * Get id
-   * @return id
+   * Get type
+   * @return type
    **/
-  @JsonProperty("id")
+  @JsonProperty("type")
   @ApiModelProperty(value = "")
-  public Long getId() {
-    return id;
+  public String getType() {
+    return type;
   }
 
-  public void setId(Long id) {
-    this.id = id;
+  public void setType(String type) {
+    this.type = type;
+  }
+
+  public Model version(String version) {
+    this.version = version;
+    return this;
+  }
+
+  /**
+   * Get version
+   * @return version
+   **/
+  @JsonProperty("version")
+  @ApiModelProperty(value = "")
+  public String getVersion() {
+    return version;
+  }
+
+  public void setVersion(String version) {
+    this.version = version;
   }
 
   public Model modelId(String modelId) {
@@ -131,42 +123,58 @@ public class Model   {
     this.trainingModel = trainingModel;
   }
 
-  public Model status(StatusEnum status) {
-    this.status = status;
+  public Model tfModels(List<TFModel> tfModels) {
+    this.tfModels = tfModels;
+    return this;
+  }
+
+  public Model addTfModelsItem(TFModel tfModelsItem) {
+    if (this.tfModels == null) {
+      this.tfModels = new ArrayList<>();
+    }
+    this.tfModels.add(tfModelsItem);
     return this;
   }
 
   /**
-   * Model Status
-   * @return status
+   * Get tfModels
+   * @return tfModels
    **/
-  @JsonProperty("status")
-  @ApiModelProperty(value = "Model Status")
-  public StatusEnum getStatus() {
-    return status;
+  @JsonProperty("TFModels")
+  @ApiModelProperty(value = "")
+  public List<TFModel> getTfModels() {
+    return tfModels;
   }
 
-  public void setStatus(StatusEnum status) {
-    this.status = status;
+  public void setTfModels(List<TFModel> tfModels) {
+    this.tfModels = tfModels;
   }
 
-  public Model published(Boolean published) {
-    this.published = published;
+  public Model data(List<String> data) {
+    this.data = data;
+    return this;
+  }
+
+  public Model addDataItem(String dataItem) {
+    if (this.data == null) {
+      this.data = new ArrayList<>();
+    }
+    this.data.add(dataItem);
     return this;
   }
 
   /**
-   * Publishing status of the model
-   * @return published
+   * Get data
+   * @return data
    **/
-  @JsonProperty("published")
-  @ApiModelProperty(value = "Publishing status of the model")
-  public Boolean isPublished() {
-    return published;
+  @JsonProperty("data")
+  @ApiModelProperty(value = "")
+  public List<String> getData() {
+    return data;
   }
 
-  public void setPublished(Boolean published) {
-    this.published = published;
+  public void setData(List<String> data) {
+    this.data = data;
   }
 
 
@@ -179,16 +187,17 @@ public class Model   {
       return false;
     }
     Model model = (Model) o;
-    return Objects.equals(this.id, model.id) &&
+    return Objects.equals(this.type, model.type) &&
+        Objects.equals(this.version, model.version) &&
         Objects.equals(this.modelId, model.modelId) &&
         Objects.equals(this.trainingModel, model.trainingModel) &&
-        Objects.equals(this.status, model.status) &&
-        Objects.equals(this.published, model.published);
+        Objects.equals(this.tfModels, model.tfModels) &&
+        Objects.equals(this.data, model.data);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, modelId, trainingModel, status, published);
+    return Objects.hash(type, version, modelId, trainingModel, tfModels, data);
   }
 
 
@@ -197,11 +206,12 @@ public class Model   {
     StringBuilder sb = new StringBuilder();
     sb.append("class Model {\n");
     
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
+    sb.append("    type: ").append(toIndentedString(type)).append("\n");
+    sb.append("    version: ").append(toIndentedString(version)).append("\n");
     sb.append("    modelId: ").append(toIndentedString(modelId)).append("\n");
     sb.append("    trainingModel: ").append(toIndentedString(trainingModel)).append("\n");
-    sb.append("    status: ").append(toIndentedString(status)).append("\n");
-    sb.append("    published: ").append(toIndentedString(published)).append("\n");
+    sb.append("    tfModels: ").append(toIndentedString(tfModels)).append("\n");
+    sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
   }

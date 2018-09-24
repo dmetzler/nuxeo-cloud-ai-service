@@ -5,7 +5,7 @@ import java.io.IOException;
 import javax.servlet.*;
 import javax.servlet.http.HttpServletResponse;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-21T08:13:33.267Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-24T23:06:58.994Z")
 public class ApiOriginFilter implements javax.servlet.Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {

@@ -18,13 +18,14 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 import javax.validation.constraints.*;
 
 /**
  * PredictionRequest
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-21T08:13:33.267Z")
-public class PredictionRequest   {
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-24T23:06:58.994Z")
+public class PredictionRequest  implements Serializable {
   @JsonProperty("modelId")
   private String modelId = null;
 

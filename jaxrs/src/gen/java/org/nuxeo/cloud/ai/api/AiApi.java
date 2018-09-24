@@ -7,10 +7,12 @@ import org.nuxeo.cloud.ai.api.factories.AiApiServiceFactory;
 import io.swagger.annotations.ApiParam;
 import io.swagger.jaxrs.*;
 
+import java.io.File;
 import org.nuxeo.cloud.ai.model.Model;
 import org.nuxeo.cloud.ai.model.ModelApiResponse;
 import org.nuxeo.cloud.ai.model.PredictionRequest;
 import org.nuxeo.cloud.ai.model.PredictionResponse;
+import org.nuxeo.cloud.ai.model.TrainingRequest;
 
 import java.util.Map;
 import java.util.List;
@@ -32,7 +34,7 @@ import javax.validation.constraints.*;
 
 
 @io.swagger.annotations.Api(description = "the ai API")
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-21T08:13:33.267Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-24T23:06:58.994Z")
 public class AiApi  {
    private final AiApiService delegate;
 
@@ -114,6 +116,21 @@ public class AiApi  {
     throws NotFoundException {
         return delegate.getModelById(modelId,securityContext);
     }
+    @GET
+    @Path("/v1/model")
+    
+    @Produces({ "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "Get all the available models", notes = "", response = Model.class, responseContainer = "List", tags={ "AI Model", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "successful operation", response = Model.class, responseContainer = "List"),
+        
+        @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid ID supplied", response = Void.class),
+        
+        @io.swagger.annotations.ApiResponse(code = 404, message = "Model not found", response = Void.class) })
+    public Response listModels(@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.listModels(securityContext);
+    }
     @POST
     @Path("/v1/predict/")
     @Consumes({ "application/json", "application/xml" })
@@ -145,9 +162,10 @@ public class AiApi  {
     @io.swagger.annotations.ApiResponses(value = { 
         @io.swagger.annotations.ApiResponse(code = 200, message = "successful operation", response = ModelApiResponse.class) })
     public Response trainModel(@ApiParam(value = "ID of model to update",required=true) @PathParam("modelId") String modelId
+,@ApiParam(value = "The definition of the training request" ,required=true) TrainingRequest trainingRequest
 ,@Context SecurityContext securityContext)
     throws NotFoundException {
-        return delegate.trainModel(modelId,securityContext);
+        return delegate.trainModel(modelId,trainingRequest,securityContext);
     }
     @PUT
     @Path("/v1/model/{modelId}")
@@ -166,9 +184,29 @@ public class AiApi  {
         
         @io.swagger.annotations.ApiResponse(code = 405, message = "Validation exception", response = Void.class) })
     public Response updateModel(@ApiParam(value = "ID of model to update",required=true) @PathParam("modelId") String modelId
-,@ApiParam(value = "Pet object that needs to be added to the store" ,required=true) Model body
+,@ApiParam(value = "Model object that has to be created" ,required=true) Model body
 ,@Context SecurityContext securityContext)
     throws NotFoundException {
         return delegate.updateModel(modelId,body,securityContext);
+    }
+    @POST
+    @Path("/v1/model/{modelId}/data")
+    @Consumes({ "multipart/form-data" })
+    @Produces({ "application/xml", "application/json" })
+    @io.swagger.annotations.ApiOperation(value = "Upload Training and Evaluation data", notes = "", response = ModelApiResponse.class, authorizations = {
+        @io.swagger.annotations.Authorization(value = "nxcloud_auth", scopes = {
+            @io.swagger.annotations.AuthorizationScope(scope = "write:ai_models", description = "modify models in your account"),
+            @io.swagger.annotations.AuthorizationScope(scope = "read:ai_models", description = "read your models")
+        })
+    }, tags={ "AI Model", })
+    @io.swagger.annotations.ApiResponses(value = { 
+        @io.swagger.annotations.ApiResponse(code = 200, message = "successful operation", response = ModelApiResponse.class) })
+    public Response uploadEVTRData(@ApiParam(value = "ID of model to update",required=true) @PathParam("modelId") String modelId
+,
+            @FormDataParam("file") InputStream fileInputStream,
+            @FormDataParam("file") FormDataContentDisposition fileDetail
+,@Context SecurityContext securityContext)
+    throws NotFoundException {
+        return delegate.uploadEVTRData(modelId,fileInputStream, fileDetail,securityContext);
     }
 }
