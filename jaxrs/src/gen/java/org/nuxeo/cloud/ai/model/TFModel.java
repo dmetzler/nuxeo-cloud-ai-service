@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
 /**
  * TFModel
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-24T23:06:58.994Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-25T15:38:17.391Z")
 public class TFModel  implements Serializable {
   @JsonProperty("version")
   private String version = null;

@@ -27,13 +27,13 @@ import javax.validation.constraints.*;
 /**
  * Model
  */
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-24T23:06:58.994Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-25T15:38:17.391Z")
 public class Model  implements Serializable {
   @JsonProperty("type")
-  private String type = null;
+  private String type = "Model";
 
   @JsonProperty("version")
-  private String version = null;
+  private String version = "v1";
 
   @JsonProperty("modelId")
   private String modelId = null;
@@ -95,7 +95,8 @@ public class Model  implements Serializable {
    * @return modelId
    **/
   @JsonProperty("modelId")
-  @ApiModelProperty(value = "")
+  @ApiModelProperty(required = true, value = "")
+  @NotNull
   public String getModelId() {
     return modelId;
   }

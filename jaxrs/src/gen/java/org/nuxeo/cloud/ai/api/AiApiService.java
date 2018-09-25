@@ -20,7 +20,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-24T23:06:58.994Z")
+@javax.annotation.Generated(value = "io.swagger.codegen.languages.JavaJerseyServerCodegen", date = "2018-09-25T15:38:17.391Z")
 public abstract class AiApiService {
     public abstract Response addModel(Model body,SecurityContext securityContext) throws NotFoundException;
     public abstract Response deleteModel(String modelId,String apiKey,SecurityContext securityContext) throws NotFoundException;
